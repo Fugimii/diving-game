@@ -1,0 +1,76 @@
+[gd_scene load_steps=7 format=3 uid="uid://cemo1ubai87ut"]
+
+[ext_resource type="Script" path="res://scenes/buildings/house/house.gd" id="1_jpjbn"]
+[ext_resource type="Texture2D" uid="uid://cm1jf62dgn7uv" path="res://art/House.aseprite" id="2_dpdpw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xqudn"]
+atlas = ExtResource("2_dpdpw")
+region = Rect2(0, 81, 104, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jf6nb"]
+atlas = ExtResource("2_dpdpw")
+region = Rect2(104, 81, 104, 27)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yse1j"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xqudn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jf6nb")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y2der"]
+size = Vector2(22.4, 41.7)
+
+[node name="House" type="StaticBody2D"]
+y_sort_enabled = true
+script = ExtResource("1_jpjbn")
+
+[node name="HouseRoof" type="Sprite2D" parent="."]
+z_index = 5
+position = Vector2(-0.199997, -63.6)
+texture = ExtResource("2_dpdpw")
+region_enabled = true
+region_rect = Rect2(0, 8, 104, 73)
+
+[node name="BottomHouse" type="AnimatedSprite2D" parent="."]
+z_as_relative = false
+y_sort_enabled = true
+texture_filter = 1
+position = Vector2(-0.199997, -13.6)
+sprite_frames = SubResource("SpriteFrames_yse1j")
+animation = &"new_animation"
+
+[node name="DoorOpenArea2D" type="Area2D" parent="."]
+position = Vector2(-0.199997, -63.6)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DoorOpenArea2D"]
+z_index = 3
+position = Vector2(0, 56.75)
+shape = SubResource("RectangleShape2D_y2der")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(-0.199997, -63.6)
+polygon = PackedVector2Array(8, 63, 8.2, 36.6, -7.8, 36.6, -8, 63, -48, 63, -48, -25, 48, -25, 48, 63)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+color = Color(0, 0, 0, 1)
+
+[node name="AboveDoorMask" type="Sprite2D" parent="."]
+z_index = 5
+position = Vector2(-1, -23)
+texture = ExtResource("2_dpdpw")
+region_enabled = true
+region_rect = Rect2(124, 81, 64, 8)
+
+[connection signal="body_entered" from="DoorOpenArea2D" to="." method="_on_door_area_2d_body_entered"]
+[connection signal="body_exited" from="DoorOpenArea2D" to="." method="_on_door_area_2d_body_exited"]

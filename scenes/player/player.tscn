@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://dg34cv3bcc3cq"]
+
+[ext_resource type="Texture2D" uid="uid://b6c87po62ldk7" path="res://icon.svg" id="2_tthyx"]
+[ext_resource type="Script" path="res://scenes/player/player.gd" id="3_dbb6s"]
+[ext_resource type="Shader" path="res://scenes/ui/shaders/circle_shader.gdshader" id="3_oa54q"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_an0s3"]
+size = Vector2(4, 4)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_02otd"]
+shader = ExtResource("3_oa54q")
+shader_parameter/circle_size = -1.0
+shader_parameter/screen_width = 1920.0
+shader_parameter/screen_height = 1080.0
+
+[node name="Player" type="CharacterBody2D"]
+y_sort_enabled = true
+scale = Vector2(4, 4)
+motion_mode = 1
+script = ExtResource("3_dbb6s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_an0s3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_tthyx")
+region_enabled = true
+region_rect = Rect2(32, 2.08165e-12, 16, 32)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(6, 6)
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="ShaderRect" type="ColorRect" parent="UI"]
+material = SubResource("ShaderMaterial_02otd")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
