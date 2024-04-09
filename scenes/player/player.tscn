@@ -1,17 +1,68 @@
-[gd_scene load_steps=6 format=3 uid="uid://dg34cv3bcc3cq"]
+[gd_scene load_steps=11 format=3 uid="uid://dg34cv3bcc3cq"]
 
-[ext_resource type="Texture2D" uid="uid://bmgxcrk2ejr1o" path="res://art/Player.aseprite" id="2_1rki5"]
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="3_dbb6s"]
+[ext_resource type="Texture2D" uid="uid://bmgxcrk2ejr1o" path="res://art/Player.aseprite" id="3_guod2"]
 [ext_resource type="Shader" path="res://scenes/ui/shaders/circle_shader.gdshader" id="3_oa54q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_an0s3"]
-size = Vector2(5, 5)
+size = Vector2(5, 5.5)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_02otd"]
 shader = ExtResource("3_oa54q")
 shader_parameter/circle_size = -1.0
 shader_parameter/screen_width = 1920.0
 shader_parameter/screen_height = 1080.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m3gmo"]
+atlas = ExtResource("3_guod2")
+region = Rect2(0, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hu17c"]
+atlas = ExtResource("3_guod2")
+region = Rect2(48, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j54ib"]
+atlas = ExtResource("3_guod2")
+region = Rect2(32, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lvxrl"]
+atlas = ExtResource("3_guod2")
+region = Rect2(16, 0, 16, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nwamo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m3gmo")
+}],
+"loop": true,
+"name": &"walk_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hu17c")
+}],
+"loop": true,
+"name": &"walk_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j54ib")
+}],
+"loop": true,
+"name": &"walk_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lvxrl")
+}],
+"loop": true,
+"name": &"walk_up",
+"speed": 5.0
+}]
 
 [node name="Player" type="CharacterBody2D"]
 y_sort_enabled = true
@@ -20,14 +71,8 @@ motion_mode = 1
 script = ExtResource("3_dbb6s")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 5.5)
+position = Vector2(0, 5.25)
 shape = SubResource("RectangleShape2D_an0s3")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_1rki5")
-region_enabled = true
-region_rect = Rect2(16, 0, 16, 32)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(6, 6)
@@ -42,3 +87,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_nwamo")
+animation = &"walk_down"

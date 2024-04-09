@@ -57,7 +57,7 @@ shape = SubResource("RectangleShape2D_y2der")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 position = Vector2(-0.199997, -63.6)
-polygon = PackedVector2Array(8, 63, 8.2, 36.6, -7.8, 36.6, -8, 63, -48, 63, -48, -25, 48, -25, 48, 63)
+polygon = PackedVector2Array(8, 63, 8.2, 29.6, -7.8, 29.6, -8, 63, -48, 63, -48, -25, 48, -25, 48, 63)
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -20.0
