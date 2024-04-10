@@ -19,7 +19,7 @@ position = Vector2(2.08165e-12, 2.08165e-12)
 scale = Vector2(2, 2)
 
 [node name="House" parent="." instance=ExtResource("2_qx1tg")]
-position = Vector2(-104, -16)
+position = Vector2(-104, -112)
 
 [node name="TeleporterToInside2" parent="House" instance=ExtResource("2_evry8")]
 z_index = 1
