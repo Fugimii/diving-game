@@ -8,5 +8,5 @@ uniform float screen_height;
 void fragment() {
 	float ratio = screen_width / screen_height;
 	float dist = distance(vec2(0.5, 0.5), vec2(mix(0.5, UV.x, ratio), UV.y));
-	COLOR.a = step(abs(circle_size*1.05), dist);
+	COLOR.a = step(abs(circle_size*1.1), dist);
 }

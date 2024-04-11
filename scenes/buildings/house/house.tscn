@@ -1,25 +1,186 @@
-[gd_scene load_steps=4 format=3 uid="uid://cemo1ubai87ut"]
+[gd_scene load_steps=9 format=3 uid="uid://cemo1ubai87ut"]
 
 [ext_resource type="Script" path="res://scenes/buildings/house/house.gd" id="1_jpjbn"]
-[ext_resource type="Texture2D" uid="uid://cg6ejbtj31fff" path="res://art/buildings/CopperHouse.aseprite" id="2_j3akk"]
+[ext_resource type="Texture2D" uid="uid://ctc5j4itlufj6" path="res://art/buildings/CopperHouse.aseprite" id="2_j3akk"]
+
+[sub_resource type="Shader" id="Shader_630iw"]
+code = "shader_type canvas_item;
+render_mode unshaded;
+
+uniform float shadowAngle: hint_range(0.0, 360.0) = 45; //Angle (in degrees) of the shadow
+uniform float wallHeight: hint_range(0.0,5.0) = 1.0; //Shadow height multiplier
+uniform ivec2 floorStart;
+//Start (in pixels) of the floor
+//ex. if the floor is 7 pixels down from the top of the sprite, y = 7
+uniform vec4 shadowColor: source_color = vec4(0.0,0.0,0.0,0.4);
+uniform ivec2 shadowCutoffStart = ivec2(0); //Cutoff (in pixels) from the top left of the sprite
+uniform ivec2 shadowCutoffEnd = ivec2(0); //Cutoff (in pixels) from the bottom right of the sprite
+uniform ivec2 shadowOffset = ivec2(0); //Offset (in pixels) of shadow
+uniform bool maskWrap = true; //Wrap if the shadow leaves the UV
+uniform sampler2D maskTop: filter_nearest, hint_default_transparent; //Mask for Y Values, opaque pixels cast shadows
+uniform sampler2D maskLeft: filter_nearest, hint_default_transparent; //Mask for X Values, opaque pixels cast shadows
+uniform sampler2D coverMask: filter_nearest, hint_default_transparent;
+//Mask for if a part of the sprite should appear in front of the shadow
+
+group_uniforms depthSetup;
+uniform float wallDepth: hint_range(0.0, 50.0,0.1) = 1.5;
+uniform int sampleMult: hint_range(1, 10, 1) = 3; //Lower values lead to pixelated depth
+uniform bool floorDepthAutoCutoff = true; //Auto cutoff unwanted stretching at bottom of wall from depth
+
+group_uniforms tilemapSetup;
+uniform bool isTileMap = false;
+uniform ivec2 tileSize = ivec2(0); //Size (in pixels) of each tile in the tilemap
+
+//Tilemap converter by Award
+vec2 get_tile_uvs(vec2 p_uv,vec2 p_tex_size,vec2 p_region_size) {
+	vec2 uv = p_uv - p_tex_size;
+	uv = fract(uv * p_tex_size / p_region_size);
+	return uv * p_region_size / p_region_size;
+}
+
+//2D top-down shadow shader by WizardWand123
+void fragment() {
+	COLOR = texture(TEXTURE,UV);
+	
+	vec2 uv = UV;
+	vec2 tileUV = UV;
+	//Change uv value for tilemap
+	if(isTileMap){
+		tileUV = get_tile_uvs(UV,vec2(textureSize(TEXTURE,0)),vec2(tileSize));
+		uv = tileUV;
+	}
+
+	vec2 pixSize = TEXTURE_PIXEL_SIZE * (isTileMap ? vec2(textureSize(TEXTURE,0))/vec2(tileSize) : vec2(1));
+	
+	uv += vec2(shadowOffset) * pixSize;
+	//Test for cutoff or cover mask
+	vec2 modCutoff = vec2(shadowCutoffStart) * pixSize;
+	vec2 modCutoffEnd = vec2(1.0)-(vec2(shadowCutoffEnd) * pixSize);
+	if(clamp(tileUV,modCutoff,modCutoffEnd) == tileUV && texture(coverMask,tileUV).a == 0.0){
+		//Find direction of angle
+		vec2 direct = vec2(cos(shadowAngle * (PI/180.0)),sin(shadowAngle * (PI/180.0)));
+		
+		vec2 depthUV = uv;
+		vec2 floorCorner = (vec2(floorStart)*pixSize);
+		vec2 floorAutoStart = sign(uv-floorCorner);
+
+		int loopTimeout = 0;
+		while(loopTimeout < max(int(wallDepth*10.0) * sampleMult,1)){
+			loopTimeout += 1;
+			
+			vec2 floorDifference = depthUV-floorCorner;
+			bvec2 skip = bvec2(sign(depthUV.x-floorCorner.x) != floorAutoStart.x && floorDepthAutoCutoff,sign(depthUV.y-floorCorner.y) != floorAutoStart.y && floorDepthAutoCutoff);
+			
+			//Find UV for Shadow
+			vec2 flipUV = floorCorner-((floorDifference/direct)/wallHeight);
+			vec2 maskUVTop = vec2(uv.x,flipUV.y) + vec2(-(floorDifference.y/direct.y)*direct.x,0.0);
+			vec2 maskUVLeft = vec2(flipUV.x,uv.y) + vec2(0.0,-(floorDifference.x/direct.x)*direct.y);
+				
+			if(maskWrap){
+				maskUVTop = vec2(fract(maskUVTop.x),maskUVTop.y);
+				maskUVLeft = vec2(maskUVLeft.x,fract(maskUVLeft.y));
+			}
+			
+			//Test if UV is beyond usual values (only useful when maskwrap disabled) to prevent stretching
+			bool offMaskTop = clamp(maskUVTop,vec2(0.0),vec2(1.0)) != maskUVTop;
+			bool offMaskLeft = clamp(maskUVLeft,vec2(0.0),vec2(1.0)) != maskUVLeft;
+			
+			//Test if moddified UV collides with mask
+			if((texture(maskTop,maskUVTop).a > 0.0 && !offMaskTop && !skip.y) || (texture(maskLeft,maskUVLeft).a > 0.0 && !offMaskLeft && !skip.x)){
+				COLOR.rgb = mix(COLOR.rgb,shadowColor.rgb,shadowColor.a);
+				break;
+			}else{
+				//Change UV for depth
+				depthUV.y += (0.005/float(sampleMult)) * sign(direct.y);
+				depthUV.x += (0.005/(float(sampleMult))) * sign(direct.x);
+			}
+		}
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ab8id"]
+shader = SubResource("Shader_630iw")
+shader_parameter/shadowAngle = 45.0
+shader_parameter/wallHeight = 1.0
+shader_parameter/floorStart = null
+shader_parameter/shadowColor = Color(0, 0, 0, 0.4)
+shader_parameter/shadowCutoffStart = Vector2i(0, 0)
+shader_parameter/shadowCutoffEnd = Vector2i(0, 0)
+shader_parameter/shadowOffset = Vector2i(0, 0)
+shader_parameter/maskWrap = true
+shader_parameter/wallDepth = 1.5
+shader_parameter/sampleMult = 3
+shader_parameter/floorDepthAutoCutoff = true
+shader_parameter/isTileMap = false
+shader_parameter/tileSize = Vector2i(0, 0)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y2der"]
-size = Vector2(20, 25)
+size = Vector2(33, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d6gig"]
+atlas = ExtResource("2_j3akk")
+region = Rect2(0, 128, 74, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_72lvj"]
+atlas = ExtResource("2_j3akk")
+region = Rect2(75, 128, 74, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bvy81"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d6gig")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_72lvj")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="House" type="StaticBody2D"]
 y_sort_enabled = true
+material = SubResource("ShaderMaterial_ab8id")
 script = ExtResource("1_jpjbn")
 
 [node name="DoorOpenArea2D" type="Area2D" parent="."]
-position = Vector2(-0.2, 84)
+position = Vector2(9.5, 19.5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DoorOpenArea2D"]
 z_index = 3
-position = Vector2(2.08165e-12, 2.08165e-12)
+position = Vector2(0, 8.5)
 shape = SubResource("RectangleShape2D_y2der")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Mainhouse" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_bvy81")
+frame_progress = 0.413518
+
+[node name="Roof" type="Sprite2D" parent="."]
+z_index = 10
+position = Vector2(0, -49)
 texture = ExtResource("2_j3akk")
+region_enabled = true
+region_rect = Rect2(0, 0, 88, 112)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+z_index = 11
+polygon = PackedVector2Array(-32, 32, 2, 32, 2, -5, 20, -5, 20, 32, 32, 32, 32, -53, -32, -53)
+
+[node name="DoorMask" type="Sprite2D" parent="."]
+z_index = 10
+position = Vector2(11, -13.5)
+texture = ExtResource("2_j3akk")
+region_enabled = true
+region_rect = Rect2(111, 125, 24, 43)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -1
+offset_left = 3.0
+offset_top = 7.0
+offset_right = 19.0
+offset_bottom = 32.0
+color = Color(0, 0, 0, 1)
 
 [connection signal="body_entered" from="DoorOpenArea2D" to="." method="_on_door_area_2d_body_entered"]
 [connection signal="body_exited" from="DoorOpenArea2D" to="." method="_on_door_area_2d_body_exited"]

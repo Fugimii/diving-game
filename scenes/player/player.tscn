@@ -5,7 +5,7 @@
 [ext_resource type="Shader" path="res://scenes/ui/shaders/circle_shader.gdshader" id="3_oa54q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_an0s3"]
-size = Vector2(5, 5.5)
+size = Vector2(7, 6)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_02otd"]
 shader = ExtResource("3_oa54q")
@@ -71,7 +71,7 @@ motion_mode = 1
 script = ExtResource("3_dbb6s")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 5.25)
+position = Vector2(0, 5)
 shape = SubResource("RectangleShape2D_an0s3")
 
 [node name="Camera2D" type="Camera2D" parent="."]
