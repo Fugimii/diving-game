@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://dg34cv3bcc3cq"]
+[gd_scene load_steps=15 format=3 uid="uid://dg34cv3bcc3cq"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="3_dbb6s"]
 [ext_resource type="Texture2D" uid="uid://bmgxcrk2ejr1o" path="res://art/Player.aseprite" id="3_guod2"]
 [ext_resource type="Shader" path="res://scenes/ui/shaders/circle_shader.gdshader" id="3_oa54q"]
+[ext_resource type="Shader" path="res://shaders/shadows.gdshader" id="4_giei0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_an0s3"]
 size = Vector2(7, 6)
@@ -64,6 +65,19 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Gradient" id="Gradient_ccupx"]
+offsets = PackedFloat32Array(0, 0.00819672)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_s2m0v"]
+gradient = SubResource("Gradient_ccupx")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x8a8u"]
+shader = ExtResource("4_giei0")
+shader_parameter/color = Color(0, 0, 0, 0.298039)
+shader_parameter/angle = 90.0
+shader_parameter/max_dist = 20.0
+shader_parameter/gradientTexture = SubResource("GradientTexture1D_s2m0v")
+
 [node name="Player" type="CharacterBody2D"]
 y_sort_enabled = true
 scale = Vector2(4, 4)
@@ -89,6 +103,11 @@ grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 2
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_nwamo")
 animation = &"walk_down"
+
+[node name="Shadows" type="Polygon2D" parent="."]
+material = SubResource("ShaderMaterial_x8a8u")
+polygon = PackedVector2Array(-317.5, -255, -325.75, 160.75, 288, 162, 287.75, -255)
