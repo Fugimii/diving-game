@@ -158,7 +158,6 @@ shape = SubResource("RectangleShape2D_y2der")
 [node name="Mainhouse" type="AnimatedSprite2D" parent="."]
 z_index = 1
 sprite_frames = SubResource("SpriteFrames_bvy81")
-frame_progress = 0.413518
 
 [node name="Roof" type="Sprite2D" parent="."]
 z_index = 10
@@ -179,7 +178,6 @@ region_enabled = true
 region_rect = Rect2(111, 125, 24, 43)
 
 [node name="ColorRect" type="ColorRect" parent="."]
-z_index = -1
 offset_left = 3.0
 offset_top = 7.0
 offset_right = 19.0
