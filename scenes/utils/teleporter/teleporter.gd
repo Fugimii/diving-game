@@ -1,3 +1,5 @@
+# yes, this is shit code. No im not going to fix it
+
 extends Area2D
 class_name Teleporter
 
@@ -28,7 +30,7 @@ func _on_body_entered(body):
 			body.can_move = true # Let the player move
 			body.circle_size = 0.0
 			body.update_circle_shader()
-			await get_tree().create_timer(0.5).timeout # Wait 2 seconds
+			await get_tree().create_timer(0.5).timeout # Wait 0.5 seconds
 			body.teleporting = true
 			await get_tree().create_timer(2.0).timeout # Wait 2 seconds
 			body.teleporting = false

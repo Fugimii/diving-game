@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://chollmnihvmmi"]
+
+[ext_resource type="Script" path="res://scenes/characters/dialouge_test/dialouge_test.gd" id="1_4qftf"]
+[ext_resource type="Texture2D" uid="uid://b6c87po62ldk7" path="res://icon.svg" id="2_u37j7"]
+
+[node name="DialougeTest" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_4qftf")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_u37j7")
