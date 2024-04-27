@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://c8ojtf50lyfr3"]
+
+[ext_resource type="Script" path="res://scenes/generation/chunk/chunk.gd" id="1_vm8b1"]
+[ext_resource type="TileSet" uid="uid://c6gfhnnt3faas" path="res://art/tileset.tres" id="1_wjya0"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_45q5p"]
+
+[node name="Chunk" type="Node2D"]
+script = ExtResource("1_vm8b1")
+noise = SubResource("FastNoiseLite_45q5p")
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource("1_wjya0")
+format = 2
