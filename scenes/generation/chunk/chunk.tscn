@@ -12,3 +12,5 @@ noise = SubResource("FastNoiseLite_45q5p")
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource("1_wjya0")
 format = 2
+
+[node name="Camera2D" type="Camera2D" parent="."]
