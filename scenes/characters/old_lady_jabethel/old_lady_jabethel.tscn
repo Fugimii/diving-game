@@ -1,0 +1,74 @@
+[gd_scene load_steps=9 format=3 uid="uid://e0f1pqnnjsry"]
+
+[ext_resource type="Texture2D" uid="uid://b57v8igccad27" path="res://art/characters/old_lady_jabethel.aseprite" id="1_2o5fp"]
+[ext_resource type="Script" path="res://scenes/characters/old_lady_jabethel/old_lady_jabethel.gd" id="1_hkegt"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7iwsb"]
+atlas = ExtResource("1_2o5fp")
+region = Rect2(0, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_plswm"]
+atlas = ExtResource("1_2o5fp")
+region = Rect2(48, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j2r7m"]
+atlas = ExtResource("1_2o5fp")
+region = Rect2(32, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jtvs2"]
+atlas = ExtResource("1_2o5fp")
+region = Rect2(16, 0, 16, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bbkrg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7iwsb")
+}],
+"loop": true,
+"name": &"walk_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_plswm")
+}],
+"loop": true,
+"name": &"walk_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j2r7m")
+}],
+"loop": true,
+"name": &"walk_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jtvs2")
+}],
+"loop": true,
+"name": &"walk_up",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2cit8"]
+size = Vector2(10, 6)
+
+[node name="OldLadyJabethel" type="RigidBody2D"]
+y_sort_enabled = true
+gravity_scale = 1.66533e-16
+angular_velocity = 0.020944
+script = ExtResource("1_hkegt")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 2
+position = Vector2(2.08165e-12, -16)
+sprite_frames = SubResource("SpriteFrames_bbkrg")
+animation = &"walk_down"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -3)
+shape = SubResource("RectangleShape2D_2cit8")

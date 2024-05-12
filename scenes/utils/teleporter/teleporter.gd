@@ -13,8 +13,7 @@ var can_teleport = true # Whether the teleporter is able teleporting the player,
 @export var collison_shape : Shape2D :
 	set(value):
 		collison_shape = value
-		if is_node_ready():
-			collider.shape = collison_shape
+		collider.shape = collison_shape
 
 func _on_body_entered(body):
 	if body is Player:

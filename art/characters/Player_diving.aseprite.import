@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://csti5ugj7ajc3"
-path="res://.godot/imported/Player_diving.aseprite-b1e64ba72e405b8473a2b21bc5351efc.ctex"
+uid="uid://cq6aihsa467ju"
+path="res://.godot/imported/Player_diving.aseprite-6d58e6fa3294aa8f2a354d3c85d440a4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/Player_diving.aseprite"
-dest_files=["res://.godot/imported/Player_diving.aseprite-b1e64ba72e405b8473a2b21bc5351efc.ctex"]
+source_file="res://art/characters/Player_diving.aseprite"
+dest_files=["res://.godot/imported/Player_diving.aseprite-6d58e6fa3294aa8f2a354d3c85d440a4.ctex"]
 
 [params]
 
