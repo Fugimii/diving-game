@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ctc5j4itlufj6"
-path="res://.godot/imported/CopperHouse.aseprite-ad058d18752f155098aec351ad46f4fb.ctex"
+uid="uid://dyy6fnc5mm5ox"
+path="res://.godot/imported/player.aseprite-748ab479804502ddd37910af767f9dc2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/buildings/CopperHouse.aseprite"
-dest_files=["res://.godot/imported/CopperHouse.aseprite-ad058d18752f155098aec351ad46f4fb.ctex"]
+source_file="res://art/characters/player.aseprite"
+dest_files=["res://.godot/imported/player.aseprite-748ab479804502ddd37910af767f9dc2.ctex"]
 
 [params]
 

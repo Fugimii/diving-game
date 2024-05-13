@@ -2,7 +2,7 @@
 
 [ext_resource type="Shader" path="res://scenes/ui/shaders/fade_to_black.gdshader" id="2_xqift"]
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="3_dbb6s"]
-[ext_resource type="Texture2D" uid="uid://dyy6fnc5mm5ox" path="res://art/characters/Player.aseprite" id="3_guod2"]
+[ext_resource type="Texture2D" uid="uid://dyy6fnc5mm5ox" path="res://art/characters/player.aseprite" id="3_guod2"]
 [ext_resource type="Shader" path="res://shaders/shadows.gdshader" id="4_giei0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_an0s3"]

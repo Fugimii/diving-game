@@ -1,9 +1,9 @@
 [gd_resource type="TileSet" load_steps=3 format=3 uid="uid://c6gfhnnt3faas"]
 
-[ext_resource type="Texture2D" uid="uid://dy10t4tlnt1m5" path="res://art/Tilemap.aseprite" id="1_6o1q3"]
+[ext_resource type="Texture2D" uid="uid://dy10t4tlnt1m5" path="res://art/tilemap.aseprite" id="1_q3cvx"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rky0y"]
-texture = ExtResource("1_6o1q3")
+texture = ExtResource("1_q3cvx")
 0:0/0 = 0
 0:0/0/terrain_set = 0
 0:0/0/terrain = 0
@@ -1337,6 +1337,10 @@ texture = ExtResource("1_6o1q3")
 5:13/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 5:13/0/physics_layer_0/angular_velocity = 0.0
 5:13/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+5:4/size_in_atlas = Vector2i(3, 3)
+5:4/0 = 0
+5:4/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+5:4/0/physics_layer_0/angular_velocity = 0.0
 
 [resource]
 physics_layer_0/collision_layer = 1

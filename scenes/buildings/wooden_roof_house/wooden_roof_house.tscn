@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://dy1y7q8xio8lt"]
+
+[ext_resource type="Texture2D" uid="uid://dtjwxtkhpayc6" path="res://art/buildings/wooden_roof_house.aseprite" id="1_p28v0"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ndrki"]
+polygon = PackedVector2Array(-35, 0, -35, -65, 35, -65, 35, 0)
+
+[node name="WoodenRoofHouse" type="StaticBody2D"]
+
+[node name="MainHouse" type="Sprite2D" parent="."]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(0, -39)
+texture = ExtResource("1_p28v0")
+region_enabled = true
+region_rect = Rect2(10, 98, 70, 78)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 10
+position = Vector2(0, -68)
+texture = ExtResource("1_p28v0")
+region_enabled = true
+region_rect = Rect2(0, 14, 90, 82)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-35, 0, -35, -65, 35, -65, 35, 0)
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_ndrki")

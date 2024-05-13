@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cq6aihsa467ju"
-path="res://.godot/imported/Player_diving.aseprite-6d58e6fa3294aa8f2a354d3c85d440a4.ctex"
+uid="uid://duc432awene81"
+path="res://.godot/imported/piranha.aseprite-62087d93686d951e32e4c8924b2e4aac.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/characters/Player_diving.aseprite"
-dest_files=["res://.godot/imported/Player_diving.aseprite-6d58e6fa3294aa8f2a354d3c85d440a4.ctex"]
+source_file="res://art/enemies/piranha.aseprite"
+dest_files=["res://.godot/imported/piranha.aseprite-62087d93686d951e32e4c8924b2e4aac.ctex"]
 
 [params]
 

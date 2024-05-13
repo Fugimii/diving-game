@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ch8dfrhcrfqfp"
-path="res://.godot/imported/BrickHouse.aseprite-182ba7bde64b1aa866dcdddc40649be0.ctex"
+uid="uid://cq6aihsa467ju"
+path="res://.godot/imported/player_diving.aseprite-f7f284e56e337b3e002d5f346e989cc1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/buildings/BrickHouse.aseprite"
-dest_files=["res://.godot/imported/BrickHouse.aseprite-182ba7bde64b1aa866dcdddc40649be0.ctex"]
+source_file="res://art/characters/player_diving.aseprite"
+dest_files=["res://.godot/imported/player_diving.aseprite-f7f284e56e337b3e002d5f346e989cc1.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bbt7mbqy3j4g0"
-path="res://.godot/imported/Tilemap.png-d1e9466417ba85d15466ef444be374f3.ctex"
+uid="uid://ch8dfrhcrfqfp"
+path="res://.godot/imported/brick_house.aseprite-df4745b027ed1b8a50e77a4eacee14b3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/Tilemap.png"
-dest_files=["res://.godot/imported/Tilemap.png-d1e9466417ba85d15466ef444be374f3.ctex"]
+source_file="res://art/buildings/brick_house.aseprite"
+dest_files=["res://.godot/imported/brick_house.aseprite-df4745b027ed1b8a50e77a4eacee14b3.ctex"]
 
 [params]
 

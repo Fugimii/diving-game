@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://cemo1ubai87ut"]
 
 [ext_resource type="Script" path="res://scenes/buildings/house/house.gd" id="1_jpjbn"]
-[ext_resource type="Texture2D" uid="uid://ctc5j4itlufj6" path="res://art/buildings/CopperHouse.aseprite" id="2_j3akk"]
+[ext_resource type="Texture2D" uid="uid://ctc5j4itlufj6" path="res://art/buildings/copper_house.aseprite" id="2_j3akk"]
 
 [sub_resource type="Shader" id="Shader_630iw"]
 code = "shader_type canvas_item;

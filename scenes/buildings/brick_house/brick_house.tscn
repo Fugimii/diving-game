@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://p3rhx6g8yuis"]
 
-[ext_resource type="Texture2D" uid="uid://ch8dfrhcrfqfp" path="res://art/buildings/BrickHouse.aseprite" id="1_l6pyr"]
+[ext_resource type="Texture2D" uid="uid://ch8dfrhcrfqfp" path="res://art/buildings/brick_house.aseprite" id="1_l6pyr"]
 [ext_resource type="Script" path="res://scenes/buildings/brick_house/brick_house.gd" id="1_td3h6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6iji7"]
@@ -36,6 +36,7 @@ script = ExtResource("1_td3h6")
 
 [node name="MainHouseSprite" type="AnimatedSprite2D" parent="."]
 z_index = 1
+y_sort_enabled = true
 sprite_frames = SubResource("SpriteFrames_i7vm4")
 
 [node name="Roof" type="Sprite2D" parent="."]
