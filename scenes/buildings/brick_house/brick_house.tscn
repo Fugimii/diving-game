@@ -1,24 +1,30 @@
-[gd_scene load_steps=8 format=3 uid="uid://p3rhx6g8yuis"]
+[gd_scene load_steps=7 format=3 uid="uid://p3rhx6g8yuis"]
 
 [ext_resource type="Texture2D" uid="uid://ch8dfrhcrfqfp" path="res://art/buildings/brick_house.aseprite" id="1_l6pyr"]
-[ext_resource type="Script" path="res://scenes/buildings/brick_house/brick_house.gd" id="1_td3h6"]
+
+[sub_resource type="GDScript" id="GDScript_a281o"]
+script/source = "extends StaticBody2D
+
+@onready var anim_sprite = $MainHouseSprite
+
+func _on_door_open_area_2d_body_entered(body):
+	if body is Player:
+		anim_sprite.frame = 1
+
+func _on_door_open_area_2d_body_exited(body):
+	if body is Player:
+		anim_sprite.frame = 0
+"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6iji7"]
 atlas = ExtResource("1_l6pyr")
 region = Rect2(0, 96, 96, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jy1c4"]
-atlas = ExtResource("1_l6pyr")
-region = Rect2(96, 96, 96, 96)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_i7vm4"]
 animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_6iji7")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jy1c4")
 }],
 "loop": true,
 "name": &"default",
@@ -32,7 +38,7 @@ size = Vector2(33, 70)
 polygon = PackedVector2Array(42, 48, 41, -20, -40, -20, -40, 48)
 
 [node name="BrickHouse" type="StaticBody2D"]
-script = ExtResource("1_td3h6")
+script = SubResource("GDScript_a281o")
 
 [node name="MainHouseSprite" type="AnimatedSprite2D" parent="."]
 z_index = 1
@@ -63,7 +69,7 @@ shape = SubResource("RectangleShape2D_ftxj6")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 z_index = 11
-polygon = PackedVector2Array(42, 48, 41, -20, -40, -20, -40, 15, -40, 48, 3, 48, 6, 41, 6, -3, 22, -3, 22, 41, 25, 48)
+polygon = PackedVector2Array(42, 48, 41, -20, -40, -20, -40, 15, -40, 48, 3, 48, 25, 48)
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_p2yy7")
