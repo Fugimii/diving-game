@@ -1,6 +1,9 @@
 extends RigidBody2D
+class_name dialogue_interactable
 
 @onready var animSprite = $AnimatedSprite2D
+
+@export var dialouge_id: String
 
 func _ready():
 	# This is horribly done

@@ -1,0 +1,89 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=2 format=3 uid="uid://cymurpbcbx54b"]
+
+[ext_resource type="Script" path="res://addons/dialogue_nodes/objects/DialogueData.gd" id="1_n1rdw"]
+
+[resource]
+script = ExtResource("1_n1rdw")
+starts = {
+"old_lady_jabethel": &"0_1"
+}
+nodes = {
+"0_1": {
+"link": &"1_1",
+"offset": Vector2(640, 300),
+"start_id": "old_lady_jabethel"
+},
+"1_1": {
+"dialogue": "Have you heard the news?",
+"offset": Vector2(880, 240),
+"options": {
+0: {
+"condition": {},
+"link": &"1_2",
+"text": ""
+}
+},
+"size": Vector2(300, 259),
+"speaker": "Old Lady Jabethel"
+},
+"1_2": {
+"dialogue": "What is it?",
+"offset": Vector2(1200, 240),
+"options": {
+0: {
+"condition": {},
+"link": &"1_3",
+"text": ""
+}
+},
+"size": Vector2(300, 242),
+"speaker": "You"
+},
+"1_3": {
+"dialogue": "Some kids were playing near the old cave entrance and they fell in... ",
+"offset": Vector2(1520, 240),
+"options": {
+0: {
+"condition": {},
+"link": &"1_4",
+"text": ""
+}
+},
+"size": Vector2(300, 240),
+"speaker": "Old Lady Jabethel"
+},
+"1_4": {
+"dialogue": "That doesn't sound very fun...",
+"offset": Vector2(1840, 240),
+"options": {
+0: {
+"condition": {},
+"link": &"1_5",
+"text": ""
+}
+},
+"size": Vector2(300, 240),
+"speaker": "You"
+},
+"1_5": {
+"dialogue": "Why are you reading all of this",
+"offset": Vector2(2160, 240),
+"options": {
+0: {
+"condition": {},
+"link": "END",
+"text": ""
+}
+},
+"size": Vector2(300, 240),
+"speaker": "Old Lady Jabethel"
+}
+}
+variables = {
+"jabethel_interactions": {
+"type": 4,
+"value": "0"
+}
+}
+strays = Array[String]([])
+characters = ""

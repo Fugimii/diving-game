@@ -11,6 +11,8 @@ const SPEED = 50.0
 
 @onready var cam = $Camera2D
 @onready var anim_sprite = $AnimatedSprite2D
+@onready var dialouge_box = $UI/DialougeControl/MarginContainer/VSplitContainer/DialogueBox
+@onready var dialouge_area = $DialougeArea
 
 func _physics_process(delta):
 	var input_vector = Vector2.ZERO
@@ -36,16 +38,24 @@ func handle_animations():
 	if Input.is_action_pressed("move_left"):
 		anim_sprite.play("walk_left")
 
-
 	if Input.is_action_pressed("move_right"):
 		anim_sprite.play("walk_right")
 	
 	if Input.is_action_pressed("move_up"):
 		anim_sprite.play("walk_up")
 
-
 	if Input.is_action_pressed("move_down"):
 		anim_sprite.play("walk_down")
 
 	else:
 		anim_sprite.stop()
+
+func _input(event):
+	if event.is_action_pressed("interact"):
+		if dialouge_box.is_running(): # Is some dialouge already open?
+			pass
+		else:
+			for body in dialouge_area.get_overlapping_bodies():
+				if body is dialogue_interactable:
+					dialouge_box.start("old_lady_jabethel")
+					break

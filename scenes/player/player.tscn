@@ -1,9 +1,15 @@
-[gd_scene load_steps=15 format=3 uid="uid://dg34cv3bcc3cq"]
+[gd_scene load_steps=25 format=3 uid="uid://dg34cv3bcc3cq"]
 
 [ext_resource type="Shader" path="res://scenes/ui/shaders/fade_to_black.gdshader" id="2_xqift"]
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="3_dbb6s"]
 [ext_resource type="Texture2D" uid="uid://dyy6fnc5mm5ox" path="res://art/characters/player.aseprite" id="3_guod2"]
+[ext_resource type="Theme" uid="uid://c7sdrp3ltdq24" path="res://addons/dialogue_nodes/themes/pixelart.theme" id="3_h71hn"]
 [ext_resource type="Shader" path="res://shaders/shadows.gdshader" id="4_giei0"]
+[ext_resource type="Resource" uid="uid://cymurpbcbx54b" path="res://dialouge.tres" id="4_lrmoi"]
+[ext_resource type="Script" path="res://addons/dialogue_nodes/objects/DialogueBox.gd" id="5_krlsr"]
+[ext_resource type="Script" path="res://addons/dialogue_nodes/objects/bbcodeWait.gd" id="6_ebkhw"]
+[ext_resource type="Script" path="res://addons/dialogue_nodes/objects/bbcodeGhost.gd" id="7_e5hov"]
+[ext_resource type="Script" path="res://addons/dialogue_nodes/objects/bbcodeMatrix.gd" id="8_mkh6q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_an0s3"]
 size = Vector2(10, 7)
@@ -13,6 +19,15 @@ shader = ExtResource("2_xqift")
 shader_parameter/circle_size = -1.0
 shader_parameter/screen_width = 1920.0
 shader_parameter/screen_height = 1080.0
+
+[sub_resource type="RichTextEffect" id="RichTextEffect_w6ys8"]
+script = ExtResource("6_ebkhw")
+
+[sub_resource type="RichTextEffect" id="RichTextEffect_7u5er"]
+script = ExtResource("7_e5hov")
+
+[sub_resource type="RichTextEffect" id="RichTextEffect_hl76t"]
+script = ExtResource("8_mkh6q")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m3gmo"]
 atlas = ExtResource("3_guod2")
@@ -78,6 +93,9 @@ shader_parameter/angle = 270.0
 shader_parameter/max_dist = 20.0
 shader_parameter/gradientTexture = SubResource("GradientTexture1D_s2m0v")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6byi6"]
+size = Vector2(50, 50)
+
 [node name="Player" type="CharacterBody2D"]
 y_sort_enabled = true
 scale = Vector2(4, 4)
@@ -104,6 +122,57 @@ grow_vertical = 2
 color = Color(0, 0, 0, 1)
 metadata/_edit_use_anchors_ = true
 
+[node name="DialougeControl" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/DialougeControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="VSplitContainer" type="VSplitContainer" parent="UI/DialougeControl/MarginContainer"]
+layout_mode = 2
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="UI/DialougeControl/MarginContainer/VSplitContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DialogueBox" type="Panel" parent="UI/DialougeControl/MarginContainer/VSplitContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.28
+theme = ExtResource("3_h71hn")
+script = ExtResource("5_krlsr")
+data = ExtResource("4_lrmoi")
+hide_portrait = true
+skip_input_action = "interact"
+custom_effects = Array[RichTextEffect]([SubResource("RichTextEffect_w6ys8"), SubResource("RichTextEffect_7u5er"), SubResource("RichTextEffect_hl76t")])
+
+[node name="DialogueBox2" type="Panel" parent="UI/DialougeControl/MarginContainer/VSplitContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.28
+theme = ExtResource("3_h71hn")
+script = ExtResource("5_krlsr")
+data = ExtResource("4_lrmoi")
+hide_portrait = true
+skip_input_action = "interact"
+custom_effects = Array[RichTextEffect]([SubResource("RichTextEffect_w6ys8"), SubResource("RichTextEffect_7u5er"), SubResource("RichTextEffect_hl76t")])
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 2
 position = Vector2(2.08165e-12, -16)
@@ -114,3 +183,9 @@ animation = &"walk_up"
 material = SubResource("ShaderMaterial_x8a8u")
 position = Vector2(0, -8)
 polygon = PackedVector2Array(-317.5, -255, -325.75, 160.75, 288, 162, 287.75, -255)
+
+[node name="DialougeArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DialougeArea"]
+position = Vector2(0, -11.75)
+shape = SubResource("RectangleShape2D_6byi6")
