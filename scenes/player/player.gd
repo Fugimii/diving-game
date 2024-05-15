@@ -8,6 +8,9 @@ const SPEED = 50.0
 @export var circle_size = -1.0
 
 @export var can_move = true
+@export var diving_suit_enabled = false : 
+	set(value):
+		diving_suit_enabled = value
 
 @onready var cam = $Camera2D
 @onready var anim_sprite = $AnimatedSprite2D
@@ -49,6 +52,9 @@ func handle_animations():
 
 	else:
 		anim_sprite.stop()
+	
+	if diving_suit_enabled:
+		anim_sprite.frame = 1
 
 func _input(event):
 	if event.is_action_pressed("interact"):

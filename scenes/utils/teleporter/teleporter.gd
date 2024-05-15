@@ -1,9 +1,12 @@
-# yes, this is shit code. No im not going to fix it
+# shittest code I've ever written, not gonna fix bc it works
 
 extends Area2D
 class_name Teleporter
 
 var can_teleport = true # Whether the teleporter is able teleporting the player, gets set to true when the player exits the area2D
+
+@export var teleportable = true
+@export var change_to_diving_suit = false
 
 @onready var collider = $CollisionShape2D
 
@@ -16,7 +19,7 @@ var can_teleport = true # Whether the teleporter is able teleporting the player,
 		collider.shape = collison_shape
 
 func _on_body_entered(body):
-	if body is Player:
+	if body is Player and teleportable:
 		var other_portal = find_other_portal(portal_id)
 		if other_portal and can_teleport: # Make sure it found another portal
 			other_portal.can_teleport = false
@@ -29,6 +32,9 @@ func _on_body_entered(body):
 			body.can_move = true # Let the player move
 			body.circle_size = 0.0
 			body.update_circle_shader()
+			
+			if change_to_diving_suit:
+				body.diving_suit_enabled = true
 			await get_tree().create_timer(0.5).timeout # Wait 0.5 seconds
 			body.teleporting = true
 			await get_tree().create_timer(2.0).timeout # Wait 2 seconds

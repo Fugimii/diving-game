@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://dg34cv3bcc3cq"]
+[gd_scene load_steps=30 format=3 uid="uid://dg34cv3bcc3cq"]
 
 [ext_resource type="Shader" path="res://scenes/ui/shaders/fade_to_black.gdshader" id="2_xqift"]
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="3_dbb6s"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://addons/dialogue_nodes/objects/bbcodeWait.gd" id="6_ebkhw"]
 [ext_resource type="Script" path="res://addons/dialogue_nodes/objects/bbcodeGhost.gd" id="7_e5hov"]
 [ext_resource type="Script" path="res://addons/dialogue_nodes/objects/bbcodeMatrix.gd" id="8_mkh6q"]
+[ext_resource type="Texture2D" uid="uid://cq6aihsa467ju" path="res://art/characters/player_diving.aseprite" id="10_acvmt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_an0s3"]
 size = Vector2(10, 7)
@@ -33,16 +34,32 @@ script = ExtResource("8_mkh6q")
 atlas = ExtResource("3_guod2")
 region = Rect2(0, 0, 16, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_4et5c"]
+atlas = ExtResource("10_acvmt")
+region = Rect2(0, 0, 16, 32)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_hu17c"]
 atlas = ExtResource("3_guod2")
+region = Rect2(48, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yyo5l"]
+atlas = ExtResource("10_acvmt")
 region = Rect2(48, 0, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j54ib"]
 atlas = ExtResource("3_guod2")
 region = Rect2(32, 0, 16, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_hmnu0"]
+atlas = ExtResource("10_acvmt")
+region = Rect2(32, 0, 16, 32)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_lvxrl"]
 atlas = ExtResource("3_guod2")
+region = Rect2(16, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_473uo"]
+atlas = ExtResource("10_acvmt")
 region = Rect2(16, 0, 16, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_nwamo"]
@@ -50,14 +67,20 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_m3gmo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4et5c")
 }],
 "loop": true,
 "name": &"walk_down",
-"speed": 5.0
+"speed": 0.0
 }, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_hu17c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yyo5l")
 }],
 "loop": true,
 "name": &"walk_left",
@@ -66,6 +89,9 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_j54ib")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hmnu0")
 }],
 "loop": true,
 "name": &"walk_right",
@@ -74,6 +100,9 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_lvxrl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_473uo")
 }],
 "loop": true,
 "name": &"walk_up",
@@ -177,7 +206,7 @@ custom_effects = Array[RichTextEffect]([SubResource("RichTextEffect_w6ys8"), Sub
 z_index = 2
 position = Vector2(2.08165e-12, -16)
 sprite_frames = SubResource("SpriteFrames_nwamo")
-animation = &"walk_up"
+animation = &"walk_down"
 
 [node name="Shadows" type="Polygon2D" parent="."]
 material = SubResource("ShaderMaterial_x8a8u")
