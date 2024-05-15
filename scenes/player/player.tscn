@@ -182,7 +182,7 @@ animation = &"walk_up"
 [node name="Shadows" type="Polygon2D" parent="."]
 material = SubResource("ShaderMaterial_x8a8u")
 position = Vector2(0, -8)
-polygon = PackedVector2Array(-317.5, -255, -325.75, 160.75, 288, 162, 287.75, -255)
+polygon = PackedVector2Array(-325, -250, -325, 160, 320, 160, 320, -250)
 
 [node name="DialougeArea" type="Area2D" parent="."]
 

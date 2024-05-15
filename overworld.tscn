@@ -12,7 +12,7 @@
 y_sort_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("1_xvuiu")]
-position = Vector2(792, -24)
+position = Vector2(-909, -1699)
 scale = Vector2(1, 1)
 
 [node name="House" parent="." instance=ExtResource("2_qx1tg")]

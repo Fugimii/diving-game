@@ -10,7 +10,7 @@ starts = {
 nodes = {
 "0_1": {
 "link": &"1_1",
-"offset": Vector2(640, 300),
+"offset": Vector2(220, 280),
 "start_id": "old_lady_jabethel"
 },
 "1_1": {
@@ -23,7 +23,7 @@ nodes = {
 "text": ""
 }
 },
-"size": Vector2(300, 259),
+"size": Vector2(300, 392),
 "speaker": "Old Lady Jabethel"
 },
 "1_2": {
@@ -36,7 +36,7 @@ nodes = {
 "text": ""
 }
 },
-"size": Vector2(300, 242),
+"size": Vector2(300, 392),
 "speaker": "You"
 },
 "1_3": {
@@ -49,7 +49,7 @@ nodes = {
 "text": ""
 }
 },
-"size": Vector2(300, 240),
+"size": Vector2(300.001, 392),
 "speaker": "Old Lady Jabethel"
 },
 "1_4": {
@@ -58,32 +58,21 @@ nodes = {
 "options": {
 0: {
 "condition": {},
-"link": &"1_5",
+"link": &"4_1",
 "text": ""
 }
 },
-"size": Vector2(300, 240),
+"size": Vector2(300, 392),
 "speaker": "You"
 },
-"1_5": {
-"dialogue": "Why are you reading all of this",
-"offset": Vector2(2160, 240),
-"options": {
-0: {
-"condition": {},
+"4_1": {
 "link": "END",
-"text": ""
-}
-},
-"size": Vector2(300, 240),
-"speaker": "Old Lady Jabethel"
-}
-}
-variables = {
-"jabethel_interactions": {
-"type": 4,
-"value": "0"
+"offset": Vector2(2321.36, 278.752),
+"type": 1,
+"value": "1",
+"variable": "jabethel_interactions"
 }
 }
+variables = {}
 strays = Array[String]([])
 characters = ""
