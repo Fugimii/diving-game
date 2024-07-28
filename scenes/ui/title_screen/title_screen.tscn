@@ -1,0 +1,90 @@
+[gd_scene load_steps=9 format=3 uid="uid://dlv6e67cvaxcv"]
+
+[ext_resource type="Script" path="res://scenes/ui/title_screen/title_screen.gd" id="1_b6s16"]
+[ext_resource type="Texture2D" uid="uid://dd47i0dh604wp" path="res://art/title_screen/gauge.aseprite.png" id="1_rojnp"]
+[ext_resource type="Texture2D" uid="uid://x8f8pyicsd7k" path="res://art/title_screen/title.aseprite" id="3_4b6qr"]
+[ext_resource type="TileSet" uid="uid://c6gfhnnt3faas" path="res://art/tileset.tres" id="4_wfagq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xfkav"]
+atlas = ExtResource("1_rojnp")
+region = Rect2(2.08165e-12, 2.08165e-12, 64, 57)
+
+[sub_resource type="Animation" id="Animation_65kaq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(2.08165e-12, 2.08165e-12, 64, 57)]
+}
+
+[sub_resource type="Animation" id="Animation_7lcq0"]
+resource_name = "play"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:texture:region")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Rect2(2.08165e-12, 2.08165e-12, 64, 57), Rect2(2.08165e-12, 57, 64, 57), Rect2(64, 2.08165e-12, 64, 57), Rect2(64, 57, 64, 57), Rect2(2.08165e-12, 114, 64, 57), Rect2(64, 114, 64, 57), Rect2(128, 2.08165e-12, 64, 57), Rect2(128, 57, 64, 57), Rect2(128, 114, 64, 57)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6jet8"]
+_data = {
+"RESET": SubResource("Animation_65kaq"),
+"play": SubResource("Animation_7lcq0")
+}
+
+[node name="TitleScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_b6s16")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -299.0
+offset_top = -266.0
+offset_right = 299.0
+offset_bottom = 266.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_xfkav")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_6jet8")
+}
+
+[node name="Title" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 3144.0
+offset_bottom = 393.0
+texture = ExtResource("3_4b6qr")
+
+[node name="TileMap" type="TileMap" parent="."]
+z_index = -1
+scale = Vector2(6, 6)
+tile_set = ExtResource("4_wfagq")
+format = 2
+layer_0/tile_data = PackedInt32Array(0, 1048578, 0, 1, 1179650, 0, 2, 1179650, 0, 3, 1179650, 0, 4, 1179650, 0, 5, 1179650, 0, 6, 1179650, 0, 7, 1179650, 0, 8, 1179650, 0, 9, 1179650, 0, 10, 1179650, 0, 11, 1179650, 0, 12, 1179650, 0, 13, 1179650, 0, 14, 1179650, 0, 15, 1179650, 0, 16, 1179650, 0, 17, 1179650, 0, 18, 1179650, 0, 19, 1310722, 0, 131072, 1048578, 8, 196608, 1048578, 8, 262144, 1048578, 8, 327680, 1048578, 8, 393216, 1048578, 8, 720896, 1179650, 3, 720897, 1179650, 3, 720898, 1179650, 3, 720899, 1179650, 3, 720900, 1179650, 3, 720901, 1179650, 3, 720902, 1179650, 3, 720903, 1179650, 3, 720904, 1179650, 3, 720905, 1179650, 3, 720906, 1179650, 3, 720907, 1179650, 3, 720908, 1179650, 3, 655360, 1179650, 3, 655361, 1179650, 3, 655362, 1179650, 3, 655363, 1179650, 3, 655364, 1179650, 3, 655365, 1179650, 3, 655366, 1179650, 3, 655367, 1179650, 3, 655368, 1179650, 3, 655369, 1179650, 3, 655370, 1179650, 3, 655371, 1179650, 3, 655372, 1179650, 3, 655373, 1179650, 3, 655374, 1179650, 3, 655375, 1179650, 3, 655376, 1179650, 3, 655377, 1179650, 3, 655378, 1179650, 3, 655379, 1179650, 3, 655380, 1179650, 3, 655381, 1179650, 3, 655382, 1179650, 3, 655383, 1179650, 3, 655384, 1179650, 3, 655385, 1179650, 3, 655386, 1179650, 3)

@@ -2,7 +2,7 @@ extends CharacterBody2D
 class_name Player
 
 const SPEED = 50.0
-
+	
 @export var teleporting = false
 @onready var circle_shader_rect = $UI/ShaderRect
 @export var circle_size = -1.0
@@ -13,7 +13,8 @@ const SPEED = 50.0
 		diving_suit_enabled = value
 
 @onready var cam = $Camera2D
-@onready var anim_sprite = $AnimatedSprite2D
+@onready var normal_sprite = $NormalSprite
+@onready var diving_sprite = $DivingSprite
 @onready var dialouge_box = $UI/DialougeControl/MarginContainer/VSplitContainer/DialogueBox
 @onready var dialouge_area = $DialougeArea
 
@@ -23,7 +24,7 @@ func _physics_process(delta):
 		input_vector = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	
 		velocity = input_vector * SPEED
-	handle_animations()
+		handle_animations()
 	
 	move_and_slide()
 
@@ -38,23 +39,31 @@ func update_circle_shader():
 	circle_shader_rect.material.set_shader_parameter("circle_size", circle_size)
 
 func handle_animations():
-	if Input.is_action_pressed("move_left"):
-		anim_sprite.play("walk_left")
-
-	if Input.is_action_pressed("move_right"):
-		anim_sprite.play("walk_right")
-	
-	if Input.is_action_pressed("move_up"):
-		anim_sprite.play("walk_up")
-
 	if Input.is_action_pressed("move_down"):
-		anim_sprite.play("walk_down")
-
+		normal_sprite.play("walk_down")
+		diving_sprite.play("walk_down")
+		
+	elif Input.is_action_pressed("move_up"):
+		normal_sprite.play("walk_up")
+		diving_sprite.play("walk_up")
+	
+	elif Input.is_action_pressed("move_left"):
+		normal_sprite.play("walk_left")
+		diving_sprite.play("walk_left")
+	
+	elif Input.is_action_pressed("move_right"):
+		normal_sprite.play("walk_right")
+		diving_sprite.play("walk_right")
+	
 	else:
-		anim_sprite.stop()
+		normal_sprite.stop()
+		diving_sprite.stop()
+		normal_sprite.frame = 0
+		diving_sprite.frame = 0
 	
 	if diving_suit_enabled:
-		anim_sprite.frame = 1
+		normal_sprite.hide()
+		diving_sprite.show()
 
 func _input(event):
 	if event.is_action_pressed("interact"):

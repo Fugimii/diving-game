@@ -8,9 +8,9 @@ class_name dialogue_interactable
 func _ready():
 	# This is horribly done
 	while true:
-		linear_velocity.x = 10
-		animSprite.animation = "walk_right"
+		linear_velocity.y = -6.5
+		animSprite.play("walk_up")
 		await get_tree().create_timer(15.0).timeout
-		linear_velocity.x = -10
-		animSprite.animation = "walk_left"
+		linear_velocity.y = 7.5
+		animSprite.play("walk_down")
 		await get_tree().create_timer(15.0).timeout

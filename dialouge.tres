@@ -15,7 +15,7 @@ nodes = {
 },
 "1_1": {
 "dialogue": "Have you heard the news?",
-"offset": Vector2(880, 240),
+"offset": Vector2(820, 240),
 "options": {
 0: {
 "condition": {},
@@ -23,7 +23,7 @@ nodes = {
 "text": ""
 }
 },
-"size": Vector2(300, 392),
+"size": Vector2(364.229, 399.271),
 "speaker": "Old Lady Jabethel"
 },
 "1_2": {
