@@ -28,5 +28,7 @@ void fragment() {
     // the gradient controls the falloff of the shadow
     alpha = get_gradient_color(alpha).r;
     
-    COLOR = vec4(color.rgb,alpha * color.a);
+    vec4 temp_colour = vec4(color.rgb,alpha * color.a);
+	
+	COLOR = temp_colour;
 }

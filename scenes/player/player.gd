@@ -1,8 +1,8 @@
 extends CharacterBody2D
 class_name Player
 
-const SPEED = 50.0
-	
+var SPEED = 50.0
+
 @export var teleporting = false
 @onready var circle_shader_rect = $UI/ShaderRect
 @export var circle_size = -1.0
@@ -62,6 +62,7 @@ func handle_animations():
 		diving_sprite.frame = 0
 	
 	if diving_suit_enabled:
+		SPEED = 25.0
 		normal_sprite.hide()
 		diving_sprite.show()
 
@@ -72,5 +73,5 @@ func _input(event):
 		else:
 			for body in dialouge_area.get_overlapping_bodies():
 				if body is dialogue_interactable:
-					dialouge_box.start("old_lady_jabethel")
+					dialouge_box.start(body.dialouge_id)
 					break
