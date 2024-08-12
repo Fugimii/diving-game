@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://dg34cv3bcc3cq"]
+[gd_scene load_steps=60 format=3 uid="uid://dg34cv3bcc3cq"]
 
 [ext_resource type="Shader" path="res://scenes/ui/shaders/transition/transition.gdshader" id="2_8uluh"]
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="3_dbb6s"]
@@ -9,9 +9,10 @@
 [ext_resource type="Script" path="res://addons/dialogue_nodes/objects/bbcodeWait.gd" id="6_ebkhw"]
 [ext_resource type="Script" path="res://addons/dialogue_nodes/objects/bbcodeGhost.gd" id="7_e5hov"]
 [ext_resource type="Script" path="res://addons/dialogue_nodes/objects/bbcodeMatrix.gd" id="8_mkh6q"]
+[ext_resource type="Texture2D" uid="uid://3jvdl8gpg355" path="res://art/ui/healthbar_red.png" id="9_nlngc"]
 [ext_resource type="Texture2D" uid="uid://qmsro5q07u6t" path="res://art/characters/shadow.aseprite" id="12_i458f"]
 [ext_resource type="Texture2D" uid="uid://cnj2ggqjloy1k" path="res://art/characters/player.png" id="12_ym1nb"]
-[ext_resource type="Texture2D" uid="uid://si015plwa25r" path="res://art/characters/spear.aseprite" id="13_oe8d2"]
+[ext_resource type="Texture2D" uid="uid://do72cpup0me4c" path="res://scenes/player/light.webp" id="13_nadf2"]
 [ext_resource type="Texture2D" uid="uid://dd2ymvqmmqflx" path="res://art/characters/player_diving.png" id="13_s3c5y"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_an0s3"]
@@ -31,6 +32,19 @@ script = ExtResource("7_e5hov")
 
 [sub_resource type="RichTextEffect" id="RichTextEffect_hl76t"]
 script = ExtResource("8_mkh6q")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_iab84"]
+texture = ExtResource("9_nlngc")
+expand_margin_left = 4.0
+expand_margin_top = 10.0
+expand_margin_right = 8.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0a2nx"]
+bg_color = Color(0.6, 0.898039, 0.313726, 1)
+border_width_top = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
 
 [sub_resource type="Gradient" id="Gradient_ccupx"]
 offsets = PackedFloat32Array(0, 0.00819672)
@@ -331,7 +345,6 @@ shape = SubResource("RectangleShape2D_an0s3")
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -8)
 zoom = Vector2(6, 6)
-position_smoothing_enabled = true
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -396,6 +409,25 @@ hide_portrait = true
 skip_input_action = "interact"
 custom_effects = Array[RichTextEffect]([SubResource("RichTextEffect_w6ys8"), SubResource("RichTextEffect_7u5er"), SubResource("RichTextEffect_hl76t")])
 
+[node name="HealthControl" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HSlider" type="HSlider" parent="UI/HealthControl"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -32.0
+offset_bottom = -16.0
+grow_vertical = 0
+theme_override_styles/slider = SubResource("StyleBoxTexture_iab84")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_0a2nx")
+
 [node name="Shadows" type="Polygon2D" parent="."]
 material = SubResource("ShaderMaterial_x8a8u")
 position = Vector2(0, -8)
@@ -411,22 +443,26 @@ shape = SubResource("RectangleShape2D_6byi6")
 y_sort_enabled = true
 texture = ExtResource("12_i458f")
 
-[node name="Spear" type="Sprite2D" parent="."]
-z_index = 2
-position = Vector2(5.5, -4.5)
-rotation = 3.14159
-texture = ExtResource("13_oe8d2")
+[node name="Overworld" type="Node2D" parent="."]
 
-[node name="NormalSprite" type="AnimatedSprite2D" parent="."]
+[node name="NormalSprite" type="AnimatedSprite2D" parent="Overworld"]
 z_index = 2
 y_sort_enabled = true
 position = Vector2(2.08165e-12, -16)
 sprite_frames = SubResource("SpriteFrames_pxelj")
 animation = &"walk_down"
 
-[node name="DivingSprite" type="AnimatedSprite2D" parent="."]
+[node name="Underwater" type="Node2D" parent="."]
 visible = false
+
+[node name="DivingSprite" type="AnimatedSprite2D" parent="Underwater"]
 z_index = 2
 position = Vector2(2.08165e-12, -16)
 sprite_frames = SubResource("SpriteFrames_d1pur")
 animation = &"walk_down"
+
+[node name="CanvasModulate" type="CanvasModulate" parent="Underwater"]
+color = Color(0.379604, 0.424456, 0.548501, 1)
+
+[node name="PointLight2D" type="PointLight2D" parent="Underwater"]
+texture = ExtResource("13_nadf2")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b6pitmp72gcg"]
+[gd_scene load_steps=10 format=3 uid="uid://b6pitmp72gcg"]
 
 [ext_resource type="Script" path="res://scenes/enemies/piranha/piranha.gd" id="1_cnncu"]
 [ext_resource type="Texture2D" uid="uid://duc432awene81" path="res://art/enemies/piranha.aseprite" id="1_pk0ma"]
@@ -47,6 +47,9 @@ radius = 7.07107
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_rnluf"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_3vduv"]
+radius = 80.0
+
 [node name="Piranha" type="RigidBody2D"]
 y_sort_enabled = true
 gravity_scale = 0.0
@@ -55,12 +58,19 @@ script = ExtResource("1_cnncu")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_xdtrm")
-animation = &"right"
+animation = &"attack"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 1)
+position = Vector2(2.08165e-12, 2.08165e-12)
 rotation = 1.5708
 shape = SubResource("CircleShape2D_r21w0")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_rnluf")
+
+[node name="AttackArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+shape = SubResource("CircleShape2D_3vduv")
+
+[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]

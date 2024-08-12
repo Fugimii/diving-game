@@ -12,9 +12,18 @@ var SPEED = 50.0
 	set(value):
 		diving_suit_enabled = value
 
+@export var health = 100 :
+	set(value):
+		health = value
+		$UI/HealthControl/HSlider.value = health
+		if health < 1:
+			get_tree().change_scene_to_file("res://scenes/ui/win_screen/lose_screen.tscn")
+
 @onready var cam = $Camera2D
-@onready var normal_sprite = $NormalSprite
-@onready var diving_sprite = $DivingSprite
+@onready var overworld_node = $Overworld
+@onready var underwater_node = $Underwater
+@onready var normal_sprite = $Overworld/NormalSprite
+@onready var diving_sprite = $Underwater/DivingSprite
 @onready var dialouge_box = $UI/DialougeControl/MarginContainer/VSplitContainer/DialogueBox
 @onready var dialouge_area = $DialougeArea
 
@@ -63,8 +72,8 @@ func handle_animations():
 	
 	if diving_suit_enabled:
 		SPEED = 25.0
-		normal_sprite.hide()
-		diving_sprite.show()
+		overworld_node.hide()
+		underwater_node.show()
 
 func _input(event):
 	if event.is_action_pressed("interact"):
