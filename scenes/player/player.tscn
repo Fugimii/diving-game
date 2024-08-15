@@ -1,5 +1,6 @@
-[gd_scene load_steps=60 format=3 uid="uid://dg34cv3bcc3cq"]
+[gd_scene load_steps=64 format=3 uid="uid://dg34cv3bcc3cq"]
 
+[ext_resource type="Shader" path="res://scenes/player/player.gdshader" id="1_xfcmj"]
 [ext_resource type="Shader" path="res://scenes/ui/shaders/transition/transition.gdshader" id="2_8uluh"]
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="3_dbb6s"]
 [ext_resource type="Theme" uid="uid://c7sdrp3ltdq24" path="res://addons/dialogue_nodes/themes/pixelart.theme" id="3_h71hn"]
@@ -14,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://cnj2ggqjloy1k" path="res://art/characters/player.png" id="12_ym1nb"]
 [ext_resource type="Texture2D" uid="uid://do72cpup0me4c" path="res://scenes/player/light.webp" id="13_nadf2"]
 [ext_resource type="Texture2D" uid="uid://dd2ymvqmmqflx" path="res://art/characters/player_diving.png" id="13_s3c5y"]
+[ext_resource type="Shader" path="res://shaders/underwater.gdshader" id="15_50cme"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_an0s3"]
 size = Vector2(10, 7)
@@ -197,6 +199,10 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ji1i6"]
+shader = ExtResource("1_xfcmj")
+shader_parameter/damaged = false
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_3a88v"]
 atlas = ExtResource("13_s3c5y")
 region = Rect2(0, 0, 16, 32)
@@ -332,6 +338,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8h60j"]
+shader = ExtResource("15_50cme")
+
 [node name="Player" type="CharacterBody2D"]
 y_sort_enabled = true
 scale = Vector2(4, 4)
@@ -457,6 +466,7 @@ visible = false
 
 [node name="DivingSprite" type="AnimatedSprite2D" parent="Underwater"]
 z_index = 2
+material = SubResource("ShaderMaterial_ji1i6")
 position = Vector2(2.08165e-12, -16)
 sprite_frames = SubResource("SpriteFrames_d1pur")
 animation = &"walk_down"
@@ -466,3 +476,8 @@ color = Color(0.379604, 0.424456, 0.548501, 1)
 
 [node name="PointLight2D" type="PointLight2D" parent="Underwater"]
 texture = ExtResource("13_nadf2")
+
+[node name="Polygon2D" type="Polygon2D" parent="Underwater"]
+z_index = 10
+material = SubResource("ShaderMaterial_8h60j")
+polygon = PackedVector2Array(-160, -98, 160, -98, 160, 82, -160, 82)

@@ -71,7 +71,7 @@ func handle_animations():
 		diving_sprite.frame = 0
 	
 	if diving_suit_enabled:
-		SPEED = 25.0
+		SPEED = 32.0
 		overworld_node.hide()
 		underwater_node.show()
 
