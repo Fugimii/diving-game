@@ -13,6 +13,7 @@ var SPEED = 50.0
 @export var diving_suit_enabled = false : 
 	set(value):
 		diving_suit_enabled = value
+		$Underwater/AudioStreamPlayer2D.play()
 
 @export var health = 100.0 :
 	set(value):
@@ -73,6 +74,7 @@ func handle_animations():
 		diving_sprite.frame = 0
 	
 	if diving_suit_enabled:
+		$Overworld/AudioStreamPlayer2D.stop()
 		SPEED = 32.0
 		overworld_node.hide()
 		underwater_node.show()

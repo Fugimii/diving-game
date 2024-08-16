@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c304em5dmnxqq"
+path="res://.godot/imported/underwater - 16_8_2024, 21.18-[AudioTrimmer.com].mp3-f48bb737cabd01d15374d87b998babbe.mp3str"
+
+[deps]
+
+source_file="res://art/music/underwater - 16_8_2024, 21.18-[AudioTrimmer.com].mp3"
+dest_files=["res://.godot/imported/underwater - 16_8_2024, 21.18-[AudioTrimmer.com].mp3-f48bb737cabd01d15374d87b998babbe.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

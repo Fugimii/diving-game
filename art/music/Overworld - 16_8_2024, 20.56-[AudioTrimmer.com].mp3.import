@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://mi1t4oqpl3yt"
+path="res://.godot/imported/Overworld - 16_8_2024, 20.56-[AudioTrimmer.com].mp3-99663024764293588ab9ffb4d4ed7d22.mp3str"
+
+[deps]
+
+source_file="res://art/music/Overworld - 16_8_2024, 20.56-[AudioTrimmer.com].mp3"
+dest_files=["res://.godot/imported/Overworld - 16_8_2024, 20.56-[AudioTrimmer.com].mp3-99663024764293588ab9ffb4d4ed7d22.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
