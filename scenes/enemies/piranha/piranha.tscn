@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b6pitmp72gcg"]
+[gd_scene load_steps=11 format=3 uid="uid://b6pitmp72gcg"]
 
 [ext_resource type="Script" path="res://scenes/enemies/piranha/piranha.gd" id="1_cnncu"]
 [ext_resource type="Texture2D" uid="uid://duc432awene81" path="res://art/enemies/piranha.aseprite" id="1_pk0ma"]
@@ -47,7 +47,10 @@ animations = [{
 radius = 7.07107
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3vduv"]
-radius = 50.0
+radius = 93.0215
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ldshh"]
+radius = 14.0357
 
 [node name="Piranha" type="CharacterBody2D"]
 y_sort_enabled = true
@@ -68,4 +71,10 @@ shape = SubResource("CircleShape2D_r21w0")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange"]
 shape = SubResource("CircleShape2D_3vduv")
 
+[node name="Attack" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Attack"]
+shape = SubResource("CircleShape2D_ldshh")
+
 [connection signal="body_entered" from="AttackRange" to="." method="_on_attack_range_body_entered"]
+[connection signal="body_entered" from="Attack" to="." method="_on_attack_body_entered"]

@@ -3,21 +3,23 @@ class_name Player
 
 var SPEED = 50.0
 
+@onready var trident_file = load("res://scenes/player/trident.tscn")
 @export var teleporting = false
 @onready var circle_shader_rect = $UI/ShaderRect
 @export var circle_size = -1.0
 
+@onready var can_trident = true
 @export var can_move = true
 @export var diving_suit_enabled = false : 
 	set(value):
 		diving_suit_enabled = value
 
-@export var health = 100 :
+@export var health = 100.0 :
 	set(value):
 		health = value
 		$UI/HealthControl/HSlider.value = health
 		if health < 1:
-			get_tree().change_scene_to_file("res://scenes/ui/win_screen/lose_screen.tscn")
+			get_tree().change_scene_to_file("res://scenes/ui/lose_screen/lose_screen.tscn")
 
 @onready var cam = $Camera2D
 @onready var overworld_node = $Overworld
@@ -84,3 +86,15 @@ func _input(event):
 				if body is dialogue_interactable:
 					dialouge_box.start(body.dialouge_id)
 					break
+	
+	if event.is_action_pressed("click"):
+		if diving_suit_enabled and can_trident:
+			$TridentTimer.start()
+			can_trident = false
+			var trident = trident_file.instantiate()
+			get_parent().add_child(trident)
+			trident.position = position
+			trident.look_at(get_global_mouse_position())
+
+func _on_trident_timer_timeout():
+	can_trident = true

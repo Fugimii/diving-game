@@ -5,13 +5,19 @@
 [resource]
 script = ExtResource("1_n1rdw")
 starts = {
-"old_lady_jabethel": &"0_1"
+"old_lady_jabethel": &"0_1",
+"win_screen": &"0_2"
 }
 nodes = {
 "0_1": {
 "link": &"1_1",
 "offset": Vector2(220, 280),
 "start_id": "old_lady_jabethel"
+},
+"0_2": {
+"link": &"1_5",
+"offset": Vector2(240, 860),
+"start_id": "win_screen"
 },
 "1_1": {
 "dialogue": "Have you heard the news?",
@@ -25,6 +31,58 @@ nodes = {
 },
 "size": Vector2(364.229, 399.271),
 "speaker": "Old Lady Jabethel"
+},
+"1_10": {
+"dialogue": "No seriously you can",
+"offset": Vector2(3942, 1236.03),
+"options": {
+0: {
+"condition": {},
+"link": &"1_11",
+"text": ""
+}
+},
+"size": Vector2(300, 331),
+"speaker": ""
+},
+"1_11": {
+"dialogue": "There is nothing after here",
+"offset": Vector2(4585.28, 1235.91),
+"options": {
+0: {
+"condition": {},
+"link": &"1_12",
+"text": ""
+}
+},
+"size": Vector2(300, 331),
+"speaker": ""
+},
+"1_12": {
+"dialogue": "LEAVE",
+"offset": Vector2(5176, 1438.91),
+"options": {
+0: {
+"condition": {},
+"link": &"1_13",
+"text": ""
+}
+},
+"size": Vector2(300, 331),
+"speaker": ""
+},
+"1_13": {
+"dialogue": "Ok well I'll close the game for you then",
+"offset": Vector2(5560, 1420),
+"options": {
+0: {
+"condition": {},
+"link": "END",
+"text": ""
+}
+},
+"size": Vector2(300, 331),
+"speaker": ""
 },
 "1_2": {
 "dialogue": "What is it?",
@@ -62,8 +120,73 @@ nodes = {
 "text": ""
 }
 },
-"size": Vector2(300, 392),
+"size": Vector2(300.001, 392),
 "speaker": "You"
+},
+"1_5": {
+"dialogue": "Thank you so much for saving us!",
+"offset": Vector2(881.4, 932.031),
+"options": {
+0: {
+"condition": {},
+"link": &"1_6",
+"text": ""
+}
+},
+"size": Vector2(432, 510.001),
+"speaker": "Girl"
+},
+"1_6": {
+"dialogue": "No problem! That octopus was hard to kill.",
+"offset": Vector2(1380, 940),
+"options": {
+0: {
+"condition": {},
+"link": &"1_7",
+"text": ""
+}
+},
+"size": Vector2(447, 445),
+"speaker": "You"
+},
+"1_7": {
+"dialogue": "You win!",
+"offset": Vector2(2264.52, 1124.55),
+"options": {
+0: {
+"condition": {},
+"link": &"1_8",
+"text": ""
+}
+},
+"size": Vector2(300, 331),
+"speaker": ""
+},
+"1_8": {
+"dialogue": "Thanks so much for playing :D",
+"offset": Vector2(2846.52, 1229.55),
+"options": {
+0: {
+"condition": {},
+"link": &"1_9",
+"text": ""
+}
+},
+"size": Vector2(300, 331),
+"speaker": ""
+},
+"1_9": {
+"dialogue": "You can close the game now",
+"offset": Vector2(3240, 1240),
+"options": {
+0: {
+"condition": {},
+"link": &"1_10",
+"text": ""
+}
+},
+"size": Vector2(300, 331),
+"speaker": ""
 },
 "4_1": {
 "link": "END",

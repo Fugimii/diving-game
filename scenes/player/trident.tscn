@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://bj1mw5ksdul4"]
+
+[ext_resource type="Texture2D" uid="uid://cla58kvsr5pgs" path="res://art/trident.png" id="1_tk26j"]
+[ext_resource type="Script" path="res://scenes/player/trident.gd" id="2_6m44b"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u8vvg"]
+radius = 3.0
+height = 16.0
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("2_6m44b")
+
+[node name="Trident" type="Sprite2D" parent="."]
+z_index = 1
+rotation = 1.5708
+texture = ExtResource("1_tk26j")
+
+[node name="Area2D" type="Area2D" parent="."]
+rotation = 1.5708
+scale = Vector2(1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CapsuleShape2D_u8vvg")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

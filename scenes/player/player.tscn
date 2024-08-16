@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=3 uid="uid://dg34cv3bcc3cq"]
+[gd_scene load_steps=65 format=3 uid="uid://dg34cv3bcc3cq"]
 
 [ext_resource type="Shader" path="res://scenes/player/player.gdshader" id="1_xfcmj"]
 [ext_resource type="Shader" path="res://scenes/ui/shaders/transition/transition.gdshader" id="2_8uluh"]
@@ -35,18 +35,21 @@ script = ExtResource("7_e5hov")
 [sub_resource type="RichTextEffect" id="RichTextEffect_hl76t"]
 script = ExtResource("8_mkh6q")
 
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_bj17i"]
+size = Vector2(0, 0)
+
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_iab84"]
 texture = ExtResource("9_nlngc")
-expand_margin_left = 4.0
 expand_margin_top = 10.0
-expand_margin_right = 8.0
 expand_margin_bottom = 10.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0a2nx"]
-bg_color = Color(0.6, 0.898039, 0.313726, 1)
-border_width_top = 2
-border_width_bottom = 2
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cdkvq"]
+bg_color = Color(0.6, 1, 0.6, 1)
+border_width_left = 2
+border_width_right = 2
 border_color = Color(1, 1, 1, 1)
+expand_margin_top = 8.0
+expand_margin_bottom = 8.0
 
 [sub_resource type="Gradient" id="Gradient_ccupx"]
 offsets = PackedFloat32Array(0, 0.00819672)
@@ -374,6 +377,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/DialougeControl"]
 layout_mode = 1
@@ -428,14 +432,15 @@ grow_vertical = 2
 
 [node name="HSlider" type="HSlider" parent="UI/HealthControl"]
 layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -32.0
-offset_bottom = -16.0
-grow_vertical = 0
+offset_left = 69.0
+offset_top = 60.0
+offset_right = 222.0
+offset_bottom = 75.9998
+scale = Vector2(2, 2)
+theme_override_icons/grabber = SubResource("PlaceholderTexture2D_bj17i")
 theme_override_styles/slider = SubResource("StyleBoxTexture_iab84")
-theme_override_styles/grabber_area = SubResource("StyleBoxFlat_0a2nx")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_cdkvq")
+value = 100.0
 
 [node name="Shadows" type="Polygon2D" parent="."]
 material = SubResource("ShaderMaterial_x8a8u")
@@ -472,12 +477,20 @@ sprite_frames = SubResource("SpriteFrames_d1pur")
 animation = &"walk_down"
 
 [node name="CanvasModulate" type="CanvasModulate" parent="Underwater"]
-color = Color(0.379604, 0.424456, 0.548501, 1)
+color = Color(0, 0, 0, 1)
 
 [node name="PointLight2D" type="PointLight2D" parent="Underwater"]
+color = Color(0.380392, 0.423529, 0.54902, 1)
+energy = 3.0
 texture = ExtResource("13_nadf2")
+texture_scale = 1.7
 
 [node name="Polygon2D" type="Polygon2D" parent="Underwater"]
 z_index = 10
 material = SubResource("ShaderMaterial_8h60j")
 polygon = PackedVector2Array(-160, -98, 160, -98, 160, 82, -160, 82)
+
+[node name="TridentTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[connection signal="timeout" from="TridentTimer" to="." method="_on_trident_timer_timeout"]
